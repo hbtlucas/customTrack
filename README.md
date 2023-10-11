@@ -1,66 +1,48 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CustomTrack
+Gerenciador de Controle e Produção.
+Este é um repositório GitHub para uma aplicação de Gerenciador de Controle e Produção, desenvolvida com as seguintes tecnologias:
+- Laravel (PHP)
+- HTML
+- CSS
+- Bootstrap
+- Materialize
+- MySQL
+- Requisitos da Aplicação
+# Requisitos:
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- Ter o Laravel, PHP, HTML, CSS, Bootstrap, Materialize e MySQL configurados e funcionando corretamente em seu ambiente de desenvolvimento.
 
-## About Laravel
+- A aplicação consiste em um CRUD que deve conter no mínimo 4 tabelas em um banco de dados, sendo que 3 delas devem conter relações entre si.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- É necessário desenvolver Models e Controllers para cada tabela do banco de dados.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- As páginas de Views devem oferecer as opções de listar, cadastrar, editar e excluir para cada tabela.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Data de Entrega
+- Esse projeto é para estudo pessoal, porém a data definida é dia 18/10/2023
 
-## Learning Laravel
+# Ideia da Aplicação
+A aplicação tem como objetivo servir como um Gerenciador de Controle e Produção. Ela foi pensada para empresas que produzem soluções de softwares personalizados, mas pode ser adaptada para qualquer empresa que necessite de um sistema de gerenciamento.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Funcionalidades Planejadas
+- Página de login e cadastro, com um design minimalista.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Cadastro inicial do VENDEDOR/ADMINISTRADOR/GERENCIADOR com informações como EMAIL, SENHA, CONFIRMAÇÃO DE SENHA, NOME e TELEFONE.
+ 
+- Login utilizando apenas o email e a senha com criptografia de hash MD5 para armazenamento no banco de dados.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Utilização do banco de dados (possivelmente com XAMPP).
 
-## Laravel Sponsors
+- Interface com uma sidebar mostrando o nome do vendedor no canto inferior e listas de navegação no topo.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+# Listas de navegação incluem:
 
-### Premium Partners
+- Clientes: Tabela para verificar informações dos clientes, com um botão para redirecionar para um formulário de cadastro de novos clientes. O formulário deve conter campos como CPF, NOME, TELEFONE e ID DO CLIENTE (AUTOINCREMENT).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Pedidos: Tabela relacionada com a tabela de clientes para verificar o andamento dos pedidos.
 
-## Contributing
+- Relatórios: Local para adicionar relatórios sobre clientes e informações gerais, também relacionado com a tabela de clientes.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Pagamentos e Faturas: Tabela também relacionada com os clientes.
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Produtos: Tabela de produtos/serviços à venda com IDs relacionada com a tabelas pedidos.
