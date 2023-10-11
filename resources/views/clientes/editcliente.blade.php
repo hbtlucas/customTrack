@@ -57,26 +57,27 @@
 
   <!-- Conteúdo da página -->
   <div class="content">
-        <h2>Cadastro de Cliente</h2>
-        <form action="{{route('clientes.cadastroclientes')}}" method="POST">
+        <h2>Editar cliente</h2>
+        <form action="{{ route('clientes.update', ['id_cliente' => $cliente->id_cliente]) }}" method="POST">
           @csrf
+          @method('PUT')
           <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" name="nome_cliente" class="form-control" id="nome_cliente" placeholder="Digite o nome">
+            <input type="text" name="nome_cliente" class="form-control" value="{{$cliente->nome_cliente}}" id="nome_cliente" placeholder="Digite o nome">
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" name="email" class="form-control" id="email" placeholder="Digite o email">
+            <input type="email" name="email" class="form-control" value="{{$cliente->email}}" id="email" placeholder="Digite o email">
           </div>
           <div class="form-group">
             <label for="telefone">Telefone:</label>
-            <input type="tel" name="telefone" class="form-control" id="telefone" placeholder="Digite o telefone">
+            <input type="tel" name="telefone" class="form-control" value="{{$cliente->telefone}}" id="telefone" placeholder="Digite o telefone">
           </div>
           <div class="form-group">
             <label for="cpf">CPF:</label>
-            <input type="text" name="cpf" class="form-control" id="cpf" placeholder="Digite seu cpf">
+            <input type="text" name="cpf" class="form-control" value="{{$cliente->cpf}}" id="cpf" placeholder="Digite seu cpf">
           </div>
-          <button type="submit" class="btn btn-dark">Cadastrar</button>
+          <button type="submit" class="btn btn-dark">Salvar</button>
         </form>
       </div>
 </div>

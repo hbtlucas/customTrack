@@ -50,7 +50,7 @@
         <span style="font-size: 30px; color: rgb(255, 0, 0);">Track</span>
     <a href="{{ route('clientes') }}">Clientes</a>
     <a href="{{ route('pedidos') }}" class="active">Pedidos</a>
-    <a href="produtos">Produtos</a>
+    <a href="{{route('produtos')}}">Produtos</a>
     <a href="faturas">Faturas</a>
     <a href="relatorios">Relatórios</a>
   </div>

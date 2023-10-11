@@ -9,4 +9,7 @@ class PedidosController extends Controller
     public function pedidos(){
         return view('pedidos.pedidos');
     }    
+    public function cadastropedido(){
+        return view('pedidos.cadastropedido');
+    }
 }

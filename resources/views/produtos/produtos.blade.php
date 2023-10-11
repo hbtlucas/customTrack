@@ -48,57 +48,79 @@
   <div class="sidebar">
         <span style="margin-left: 25px; font-size: 30px; color: rgb(255, 255, 255);">Custom</span>
         <span style="font-size: 30px; color: rgb(255, 0, 0);">Track</span>
-    <a href="{{ route('clientes') }}" class="active">Clientes</a>
-    <a href="{{ route('pedidos') }}">Pedidos</a>
-    <a href="{{route('produtos')}}">Produtos</a>
-    <a href="faturas">Faturas</a>
-    <a href="relatorios">Relatórios</a>
+        <a href="{{route('clientes')}}">Clientes</a>
+        <a href="{{route('pedidos')}}">Pedidos</a>
+        <a href="{{route('produtos')}}" class="active">Produtos</a>
+        <a href="#">Faturas</a>
+        <a href="#">Relatórios</a>
   </div>
 
   <!-- Conteúdo da página -->
   <div class="content">
 
     <div style="padding: 20px;" class="row">
-      <form style="margin: 10px;" method="" action="{{ route('index') }}">
+      <form style="margin: 10px;" method="" action="{{route('index')}}">
         <button class="btn btn-dark" type="submit">Home</button>
       </form>
 
-      <form style="margin: 10px;" method="" action="{{route('clientes.cadastroclientes')}}">
-        <button class="btn btn-dark" type="submit">Cadastrar Cliente</button>
+      <form style="margin: 10px;" method="" action="{{route('produtos.cadastroproduto')}}">
+        <button class="btn btn-dark" type="submit">Adicionar Produto</button>
       </form>
   </div>
 
     <div class="row">
         <div style="margin-left: 30px; border: solid rgb(43, 43, 43) 1px;">
-            <table style="width: 1200px; height: auto;" class="table table-striped">
+            <table class="table table-striped">
               <thead> 
                 <tr>
                   <th>Id</th>
-                  <th>Nome</th>
-                  <th>Telefone</th>
-                  <th>Email</th>
-                  <th>CPF</th>
-                  <th>Ações</th>
+                  <th>Nome do produto</th>
+                  <th>Valor unitário</th>
+                  <th>Categoria</th>
+                  <th>Descrição</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($clientes as $cliente)
                 <tr>
-                  <td>{{ $cliente->id_cliente}}</td>
-                  <td>{{ $cliente->nome_cliente}}</td>
-                  <td>{{ $cliente->telefone}}</td>
-                  <td>{{ $cliente->email}}</td>
-                  <td>{{ $cliente->cpf}}</td>
+                  <td>1</td>
+                  <td>Produto</td>
+                  <td>1.000 Reais</td>
+                  <td>Software</td>
+                  <td>Gerenciador</td>
                   <td>
                     <form action="">
                       <button type="submit" class="btn btn-danger">Deletar</button>
-                    </form>
-                    <form action="{{ route('clientes.editcliente', ['id_cliente' => $cliente->id_cliente]) }}">
                       <button type="submit" class="btn btn-info">Editar</button>
                     </form>
                   </td>
                 </tr>
-                @endforeach
+                <tr>
+                  <td>1</td>
+                  <td>Produto</td>
+                  <td>1.000 Reais</td>
+                  <td>Software</td>
+                  <td>Gerenciador</td>
+                  <td>
+                    <form action="">
+                      <button type="submit" class="btn btn-danger">Deletar</button>
+                      <button type="submit" class="btn btn-info">Editar</button>
+                    </form>
+                  </td>
+                </tr>
+                <tr>
+                  <tr>
+                    <td>1</td>
+                    <td>Produto</td>
+                    <td>1.000 Reais</td>
+                    <td>Software</td>
+                    <td>Gerenciador</td>
+                    <td>
+                      <form action="">
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                        <button type="submit" class="btn btn-info">Editar</button>
+                      </form>
+                    </td>
+                  </tr>
               </tbody>
           </table>
         </div>

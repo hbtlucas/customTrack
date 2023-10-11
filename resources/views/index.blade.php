@@ -51,7 +51,7 @@
         <span style="font-size: 30px; color: rgb(255, 0, 0);">Track</span>
     <a href="{{ route('clientes') }}">Clientes</a>
     <a href="{{ route('pedidos') }}">Pedidos</a>
-    <a href="/produtos">Produtos</a>
+    <a href="{{route('produtos')}}">Produtos</a>
     <a href="/faturas">Faturas</a>
     <a href="/relatorios">Relatórios</a>
   </div>
@@ -62,7 +62,7 @@
         <div style="margin-left: 30px;">
             <div style="padding: 20px; border: solid 1px rgb(85, 85, 85) ;" class="card">
               <div class="card-image">
-                <img style="width: 600px; height: auto;" src="imagens/5012404.jpg" alt="Imagem de fundo">
+                <img style="width: 600px; height: auto;" src="{{asset('imagens/5012404.jpg')}}" alt="Imagem de fundo">
               </div>
               <div class="card-content">
                 <p>Essa aplicação tem como objetivo servir como um Gerenciador de Controle e Produção. <br>

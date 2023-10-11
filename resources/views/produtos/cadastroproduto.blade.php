@@ -48,34 +48,38 @@
   <div class="sidebar">
         <span style="margin-left: 25px; font-size: 30px; color: rgb(255, 255, 255);">Custom</span>
         <span style="font-size: 30px; color: rgb(255, 0, 0);">Track</span>
-    <a href="{{ route('clientes') }}" class="active">Clientes</a>
-    <a href="{{ route('pedidos') }}">Pedidos</a>
-    <a href="{{route('produtos')}}">Produtos</a>
-    <a href="faturas">Faturas</a>
-    <a href="relatorios">Relatórios</a>
+    <a href="{{route('clientes')}}">Clientes</a>
+    <a href="{{route('pedidos')}}">Pedidos</a>
+    <a href="{{route('produtos')}}" class="active">Produtos</a>
+    <a href="#">Faturas</a>
+    <a href="#">Relatórios</a>
   </div>
 
   <!-- Conteúdo da página -->
+
   <div class="content">
-        <h2>Cadastro de Cliente</h2>
-        <form action="{{route('clientes.cadastroclientes')}}" method="POST">
-          @csrf
+        <h2>Adicionar novo produto</h2>
+        <form>
           <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome_cliente" class="form-control" id="nome_cliente" placeholder="Digite o nome">
+            <label for="produto">Nome do produto:</label>
+            <input type="text" class="form-control" id="produto" placeholder="Digite o nome do produto">
           </div>
+
           <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="email" class="form-control" id="email" placeholder="Digite o email">
+            <label for="valorunitario">Valor do produto por unidade</label>
+            <input type="number" class="form-control" id="quantidade" placeholder="R$">
           </div>
+
           <div class="form-group">
-            <label for="telefone">Telefone:</label>
-            <input type="tel" name="telefone" class="form-control" id="telefone" placeholder="Digite o telefone">
+            <label for="categoria">Categoria do produto</label>
+            <input type="number" class="form-control" id="quantidade" placeholder="Software">
           </div>
+
           <div class="form-group">
-            <label for="cpf">CPF:</label>
-            <input type="text" name="cpf" class="form-control" id="cpf" placeholder="Digite seu cpf">
+            <label for="descricao">Descricao do produto</label>
+            <input type="number" class="form-control" id="descricao" placeholder="">
           </div>
+
           <button type="submit" class="btn btn-dark">Cadastrar</button>
         </form>
       </div>
