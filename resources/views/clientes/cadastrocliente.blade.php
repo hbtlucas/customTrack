@@ -58,7 +58,7 @@
   <!-- Conteúdo da página -->
   <div class="content">
         <h2>Cadastro de Cliente</h2>
-        <form action="{{route('clientes.cadastroclientes')}}" method="POST">
+        <form action="{{route('clientes.store')}}" method="POST">
           @csrf
           <div class="form-group">
             <label for="nome">Nome:</label>

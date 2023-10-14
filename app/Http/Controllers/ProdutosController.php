@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\produtos;
+
 
 class ProdutosController extends Controller
 {
@@ -14,12 +16,27 @@ class ProdutosController extends Controller
         return view('produtos.cadastroproduto');
     }
 
-    public function store(){
+    public function store(Request $request){
+        $produtos = new produtos(); 
+        $produtos::create($request->all());
+        return redirect()->route('produtos');
+    }
+
+    public function listarprodutos(){
+        $produtos = produtos::all(); // recuperando parametros da tabela
+        return view('produtos.produtos', ['produtos' => $produtos]);
+    }
+
+    public function editprodutos(){
 
     }
 
-    public function listarproduto(){
+    public function updateprodutos(){
 
+    }
+
+    public function deleteprodutos(){
+        
     }
   
 }

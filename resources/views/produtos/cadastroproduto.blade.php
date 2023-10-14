@@ -59,25 +59,21 @@
 
   <div class="content">
         <h2>Adicionar novo produto</h2>
-        <form>
+        <form action="{{route('produtos.store')}}" method="POST">
+          @csrf
           <div class="form-group">
-            <label for="produto">Nome do produto:</label>
-            <input type="text" class="form-control" id="produto" placeholder="Digite o nome do produto">
-          </div>
-
-          <div class="form-group">
-            <label for="valorunitario">Valor do produto por unidade</label>
-            <input type="number" class="form-control" id="quantidade" placeholder="R$">
+            <label for="nome_produto">Nome do produto:</label>
+            <input type="text" class="form-control" id="nome_produto" name="nome_produto" placeholder="Digite o nome do produto">
           </div>
 
           <div class="form-group">
             <label for="categoria">Categoria do produto</label>
-            <input type="number" class="form-control" id="quantidade" placeholder="Software">
+            <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Software">
           </div>
 
           <div class="form-group">
-            <label for="descricao">Descricao do produto</label>
-            <input type="number" class="form-control" id="descricao" placeholder="">
+            <label for="valor_produto">Valor do produto</label>
+            <input type="number" class="form-control" id="valor_produto" name="valor_produto" placeholder="Valor do produto por unidade">
           </div>
 
           <button type="submit" class="btn btn-dark">Cadastrar</button>

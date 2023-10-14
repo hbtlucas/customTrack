@@ -35,13 +35,23 @@ class ClientesController extends Controller
         $cliente = clientes::find($id_cliente);
         return view('clientes.editcliente', ['cliente' => $cliente]);
       }
-
       
       public function updatecliente(Request $request, $id_cliente)
       {
         $cliente = clientes::find($id_cliente);
         $cliente->update($request->all());
         return redirect()->route('clientes');
+      }
+
+      public function deletecliente($id_cliente)
+      {
+        $cliente = clientes::find($id_cliente);
+        if($cliente){
+          $cliente->delete();
+          return redirect()->route('clientes')->with('success', 'Cliente excluído com sucesso');
+        } else {
+          return redirect()->route('clientes')->with('error', 'Cliente não encontrado');
+        }
       }
   
 }

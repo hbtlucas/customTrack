@@ -90,12 +90,24 @@
                   <td>{{ $cliente->email}}</td>
                   <td>{{ $cliente->cpf}}</td>
                   <td>
-                    <form action="">
-                      <button type="submit" class="btn btn-danger">Deletar</button>
-                    </form>
-                    <form action="{{ route('clientes.editcliente', ['id_cliente' => $cliente->id_cliente]) }}">
-                      <button type="submit" class="btn btn-info">Editar</button>
-                    </form>
+                    <div class="row">
+
+                    <div style="margin-left: 10px">
+                      <form action="{{ route('clientes.delete', ['id_cliente' => $cliente->id_cliente]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                      </form>
+                    </div>
+
+                    <div style="margin-left: 10px">
+                      <form action="{{ route('clientes.editcliente', ['id_cliente' => $cliente->id_cliente]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-info">Editar</button>
+                      </form>
+                    </div>
+
+                    </div>
                   </td>
                 </tr>
                 @endforeach

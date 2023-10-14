@@ -69,7 +69,7 @@
   </div>
 
     <div class="row">
-        <div style="margin-left: 30px; border: solid rgb(43, 43, 43) 1px;">
+        <div style="margin-left: 30px;">
             <table class="table table-striped">
               <thead> 
                 <tr>
@@ -77,50 +77,37 @@
                   <th>Nome do produto</th>
                   <th>Valor unitário</th>
                   <th>Categoria</th>
-                  <th>Descrição</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
+                @foreach ($produtos as $produto)
                 <tr>
-                  <td>1</td>
-                  <td>Produto</td>
-                  <td>1.000 Reais</td>
-                  <td>Software</td>
-                  <td>Gerenciador</td>
-                  <td>
-                    <form action="">
-                      <button type="submit" class="btn btn-danger">Deletar</button>
-                      <button type="submit" class="btn btn-info">Editar</button>
-                    </form>
-                  </td>
+                  <td>{{ $produto->id_produto }}</td>
+                  <td>{{ $produto->nome_produto }}</td>
+                  <td>{{ $produto->valor_produto }} </td>
+                  <td>{{ $produto->categoria }}</td>
+                <td>
+                  <div class="row">
+                      <div style="margin-left: 10px">
+                        <form action="">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
+                      </div>
+
+                      <div style="margin-left: 10px">
+                        <form action="">
+                          @csrf
+                          @method('PUT')
+                          <button type="submit" class="btn btn-info">Editar</button>
+                        </form>
+                      </div>
+                  </div>
+                </td>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Produto</td>
-                  <td>1.000 Reais</td>
-                  <td>Software</td>
-                  <td>Gerenciador</td>
-                  <td>
-                    <form action="">
-                      <button type="submit" class="btn btn-danger">Deletar</button>
-                      <button type="submit" class="btn btn-info">Editar</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Produto</td>
-                    <td>1.000 Reais</td>
-                    <td>Software</td>
-                    <td>Gerenciador</td>
-                    <td>
-                      <form action="">
-                        <button type="submit" class="btn btn-danger">Deletar</button>
-                        <button type="submit" class="btn btn-info">Editar</button>
-                      </form>
-                    </td>
-                  </tr>
+                @endforeach
               </tbody>
           </table>
         </div>
