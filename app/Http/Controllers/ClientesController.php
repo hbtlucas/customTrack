@@ -48,9 +48,9 @@ class ClientesController extends Controller
         $cliente = clientes::find($id_cliente);
         if($cliente){
           $cliente->delete();
-          return redirect()->route('clientes')->with('success', 'Cliente excluído com sucesso');
+          return redirect()->route('clientes');
         } else {
-          return redirect()->route('clientes')->with('error', 'Cliente não encontrado');
+          return redirect()->route('clientes');
         }
       }
   

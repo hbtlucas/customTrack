@@ -90,7 +90,7 @@
                 <td>
                   <div class="row">
                       <div style="margin-left: 10px">
-                        <form action="">
+                        <form action="{{ route('produtos.delete', ['id_produto'=>$produto->id_produto]) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-danger">Deletar</button>
@@ -98,9 +98,8 @@
                       </div>
 
                       <div style="margin-left: 10px">
-                        <form action="">
+                        <form action="{{ route('produtos.edit', ['id_produto' => $produto->id_produto]) }}">
                           @csrf
-                          @method('PUT')
                           <button type="submit" class="btn btn-info">Editar</button>
                         </form>
                       </div>

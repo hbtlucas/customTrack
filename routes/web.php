@@ -36,7 +36,10 @@ Route::prefix('/produtos')->group(function(){
     Route::get('/',[\App\Http\Controllers\ProdutosController::class, 'listarprodutos'])->name('produtos');
     Route::get('/cadastroproduto',[\App\Http\Controllers\ProdutosController::class, 'cadastroproduto'])->name('produtos.cadastroproduto');
     Route::post('/cadastroproduto',[\App\Http\Controllers\ProdutosController::class, 'store'])->name('produtos.store');
-    Route::post('/editproduto',[\App\Http\Controllers\ProdutosController::class, 'editprodutos'])->name('produtos.edit');
+    Route::get('/editproduto/{id_produto}',[\App\Http\Controllers\ProdutosController::class, 'editprodutos'])->name('produtos.edit');
+    Route::put('/editproduto/{id_produto}',[\App\Http\Controllers\ProdutosController::class, 'update'])->name('produtos.update');
+    Route::delete('/{id_produto}',[\App\Http\Controllers\ProdutosController::class, 'delete'])->name('produtos.delete');
+
 
 
 });
