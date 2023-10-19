@@ -11,4 +11,9 @@ class produtos extends Model
     protected $primaryKey = 'id_produto';
     public $timestamps = false;
     protected $fillable = ['nome_produto', 'valor_produto', 'categoria'];
+
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class, 'id_produto');
+    }
 }

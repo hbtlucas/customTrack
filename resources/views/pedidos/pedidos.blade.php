@@ -85,53 +85,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Cliente 1</td>
-                  <td>Produto</td>
-                  <td>23</td>
-                  <td>PIX</td>
-                  <td>
-                    <select class="form-control" id="statuspedido">
-                        <option value="andamento">Andamento</option>
-                        <option value="aprovacao">Aguardando Aprovação</option>
-                        <option value="concluido">Concluido</option>
-                    </select>
-                  </td>
-                  <td>
-                    <select class="form-control" id="statuspagamento">
-                      <option value="andamento">Aprovado</option>
-                      <option value="aprovacao">Em falta</option>
-                    </select>
-                  </td>
-                  <td>1.600 reais</td>
-                  <td>
-                    <form action="">
-                      <button type="submit" class="btn btn-danger">Deletar</button>
-                      <button type="submit" class="btn btn-info">Editar</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
                   <tr>
                     <td>1</td>
                     <td>Cliente 1</td>
                     <td>Produto</td>
                     <td>23</td>
                     <td>PIX</td>
-                    <td>
-                      <select class="form-control" id="statuspedido">
-                          <option value="andamento">Andamento</option>
-                          <option value="aprovacao">Aguardando Aprovação</option>
-                          <option value="concluido">Concluido</option>
-                      </select>
-                    </td>
-                    <td>
-                      <select class="form-control" id="statuspagamento">
-                        <option value="andamento">Aprovado</option>
-                        <option value="aprovacao">Em falta</option>
-                      </select>
-                    </td>
+                    <td>Andamento</td>
+                    <td>Aprovado</td>
                     <td>1.600 reais</td>
                     <td>
                       <form action="">
@@ -140,7 +101,6 @@
                       </form>
                     </td>
                   </tr>
-                  <tr>
               </tbody>
           </table>
         </div>

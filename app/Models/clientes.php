@@ -11,4 +11,9 @@ class clientes extends Model
     protected $primaryKey = 'id_cliente';
     public $timestamps = false;
     protected $fillable = ['nome_cliente', 'telefone', 'email','cpf'];
+
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class, 'id_cliente');
+    }
 }

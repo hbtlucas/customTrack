@@ -59,32 +59,50 @@
 
   <div class="content">
         <h2>Cadastro de Pedido</h2>
-        <form>
+        <form action="{{route('pedidos.store')}}" method="POST">
+          @csrf
           <div class="form-group">
-            <label for="email">Email do Cliente:</label>
-            <input type="email" class="form-control" id="email" placeholder="Digite o email do cliente que está fazendo o pedido">
+            <label for="email-cliente">Email do Cliente:</label>
+            <input name="email-cliente" type="email" class="form-control" id="email-cliente" placeholder="Digite o email do cliente que está fazendo o pedido">
           </div>
 
           <div class="form-group">
             <label for="produto">Nome do produto:</label>
-            <input type="text" class="form-control" id="produto" placeholder="Digite o nome do produto">
+            <input name="produto" type="text" class="form-control" id="produto" placeholder="Digite o nome do produto">
           </div>
 
           <div class="form-group">
             <label for="quantidade">Quantidade</label>
-            <input type="number" class="form-control" id="quantidade" placeholder="Digite a quantidade">
+            <input name="quantidade" type="number" class="form-control" id="quantidade" placeholder="Digite a quantidade">
           </div>
           
           <div class="form-group">
-            <label for="formaPagamento">Forma de Pagamento:</label>
-            <select class="form-control" id="formaPagamento">
-              <option value="pix">Pix</option>
-              <option value="cartaoCredito">Cartão de Crédito</option>
-              <option value="cartaoDebito">Cartão de Débito</option>
-              <option value="dinheiroFisico">Dinheiro Físico</option>
+            <label for="id_forma_pagamento">Forma de Pagamento:</label>
+            <select name="id_forma_pagamento" class="form-control" id="id_forma_pagamento">
+              <option value="1">Pix</option>
+              <option value="2">Cartão de Crédito</option>
+              <option value="3">Cartão de Débito</option>
+              <option value="4">Dinheiro Físico</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="status_pedido">Status do pedido: </label>
+            <select name="status_pedido" class="form-control">
+              <option value="andamento">Andamento</option>
+              <option value="aprovacao">Aguardando Aprovação</option>
+              <option value="concluido">Concluido</option>
             </select>
           </div>
 
+          <div class="form-group">
+            <label for="status_pagamento">Status do pagamento </label>
+            <select name="status_pagamento" class="form-control" id="status_pagamento">
+              <option value="andamento">Aprovado</option>
+              <option value="aprovacao">Em falta</option>
+            </select>
+          </div>
+          
           <button type="submit" class="btn btn-dark">Cadastrar</button>
         </form>
       </div>
