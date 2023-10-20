@@ -58,8 +58,8 @@
   <!-- Conteúdo da página -->
 
   <div class="content">
-        <h2>Cadastro de Pedido</h2>
-        <form action="{{route('pedidos.store')}}" method="POST">
+        <h2>Editar Pedido</h2>
+        <form action="{{route('pedidos.edit')}}" method="GET">
           @csrf
           <div class="form-group">
             <label for="email-cliente">Email do Cliente:</label>
@@ -89,21 +89,21 @@
           <div class="form-group">
             <label for="status_pedido">Status do pedido: </label>
             <select name="status_pedido" class="form-control">
-              <option value="Andamento">Andamento</option>
-              <option value="Aprovacao">Aguardando Aprovação</option>
-              <option value="Concluido">Concluido</option>
+              <option value="andamento">Andamento</option>
+              <option value="aprovacao">Aguardando Aprovação</option>
+              <option value="concluido">Concluido</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="status_pagamento">Status do pagamento </label>
             <select name="status_pagamento" class="form-control" id="status_pagamento">
-              <option value="Aprovado">Aprovado</option>
-              <option value="Aguardando">Em falta</option>
+              <option value="aprovado">Aprovado</option>
+              <option value="aguardando">Em falta</option>
             </select>
           </div>
           
-          <button type="submit" class="btn btn-dark">Cadastrar</button>
+          <button type="submit" class="btn btn-dark">Salvar</button>
         </form>
       </div>
 </div>

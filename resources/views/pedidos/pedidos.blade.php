@@ -85,15 +85,16 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($pedidos as $pedidos)                    
                   <tr>
-                    <td>1</td>
-                    <td>Cliente 1</td>
-                    <td>Produto</td>
-                    <td>23</td>
-                    <td>PIX</td>
-                    <td>Andamento</td>
-                    <td>Aprovado</td>
-                    <td>1.600 reais</td>
+                    <td>{{$pedidos->id_pedido}}</td>
+                    <td>{{$pedidos->clientes->nome_cliente}}</td>
+                    <td>{{$pedidos->produtos->nome_produto}}</td>
+                    <td>{{$pedidos->quantidade}}</td>
+                    <td>{{$formasPagamento[$pedidos->id_forma_pagamento]}}</td>
+                    <td>{{$pedidos->status_pedido}}</td>
+                    <td>{{$pedidos->status_pagamento}}</td>
+                    <td>{{$pedidos->valor_pedido}}</td>
                     <td>
                       <form action="">
                         <button type="submit" class="btn btn-danger">Deletar</button>
@@ -101,6 +102,7 @@
                       </form>
                     </td>
                   </tr>
+                  @endforeach
               </tbody>
           </table>
         </div>

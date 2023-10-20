@@ -12,4 +12,14 @@ class pedidos extends Model
     protected $primaryKey = 'id_pedidos';
     public $timestamps = false;
     protected $guarded = [];
+
+    public function clientes()
+    {
+        return $this->belongsTo(clientes::class, 'id_cliente');
+    }
+
+    public function produtos()
+    {
+        return $this->belongsTo(produtos::class, 'id_produto');
+    }
 }
