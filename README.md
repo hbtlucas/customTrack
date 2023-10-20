@@ -19,7 +19,7 @@ Este é um repositório GitHub para uma aplicação de Gerenciador de Controle e
 - As páginas de Views devem oferecer as opções de listar, cadastrar, editar e excluir para cada tabela.
 
 # Data de Entrega
-- Esse projeto é para estudo pessoal, porém a data definida é dia 18/10/2023
+- Esse projeto é para estudo pessoal, porém a data definida é dia 31/10/2023
 
 # Ideia da Aplicação
 A aplicação tem como objetivo servir como um Gerenciador de Controle e Produção. Ela foi pensada para empresas que produzem soluções de softwares personalizados, mas pode ser adaptada para qualquer empresa que necessite de um sistema de gerenciamento.
