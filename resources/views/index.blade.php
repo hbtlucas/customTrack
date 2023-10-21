@@ -70,7 +70,7 @@
                 pode ser adaptada para qualquer empresa que necessite de um sistema <br> de gerenciamento.</p>
               </div>
               <div class="card-action">
-                <a href="#">Vamos lá!</a>
+                <a href="{{route('clientes')}}">Vamos lá!</a>
               </div>
             </div>
         </div>

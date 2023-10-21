@@ -31,8 +31,8 @@ Route::prefix('/pedidos')->group(function(){
     Route::get('/',[\App\Http\Controllers\PedidosController::class, 'listarpedidos'])->name('pedidos');
     Route::get('/cadastropedido',[\App\Http\Controllers\PedidosController::class, 'cadastropedido'])->name('pedidos.cadastropedido');
     Route::post('/cadastropedido',[\App\Http\Controllers\PedidosController::class, 'store'])->name('pedidos.store');
-    Route::get('/editpedido',[\App\Http\Controllers\PedidosController::class, 'edit'])->name('pedidos.edit');
-
+    Route::get('/editpedido/{id_pedido}',[\App\Http\Controllers\PedidosController::class, 'edit'])->name('pedidos.edit');
+    Route::put('/editpedido/{id_pedido}',[\App\Http\Controllers\PedidosController::class, 'update'])->name('pedidos.update');
 });
 
 Route::prefix('/produtos')->group(function(){

@@ -71,12 +71,23 @@ class PedidosController extends Controller
         return view('pedidos.pedidos', ['pedidos' => $pedidos, 'formasPagamento' => $formasPagamento]);
     }
 
-    public function edit(){
-
+    public function edit($id_pedido){
+        $pedidos = pedidos::find($id_pedido);
+        return view('pedidos.editpedido',['pedidos' => $pedidos]);
     }
 
-    public function update(){
+    public function update(Request $request, $id_pedido){
+        $pedidos = pedidos::find($id_pedido);
+    
+        $pedidos->clientes->email = $request->input('email-cliente');
+        $pedidos->produtos->nome_produto = $request->input('produto');
+        $pedidos->quantidade = $request->input('quantidade');
+        $pedidos->id_forma_pagamento = $request->input('id_forma_pagamento');
+        $pedidos->status_pedido = $request->input('status_pedido');
+        $pedidos->status_pagamento = $request->input('status_pagamento');
 
+        $pedidos->save();
+        return redirect()->route('pedidos');
     }
 
     public function delete(){

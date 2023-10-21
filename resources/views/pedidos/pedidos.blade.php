@@ -69,7 +69,7 @@
   </div>
 
     <div class="row">
-        <div style="margin-left: 30px; border: solid rgb(43, 43, 43) 1px;">
+        <div style="margin-left: 30px;">
             <table class="table table-striped">
               <thead> 
                 <tr>
@@ -96,10 +96,17 @@
                     <td>{{$pedidos->status_pagamento}}</td>
                     <td>{{$pedidos->valor_pedido}}</td>
                     <td>
-                      <form action="">
+                      <div class="row">
+                      <form style="margin-left: 5px" action="">
                         <button type="submit" class="btn btn-danger">Deletar</button>
+                      </form>
+
+                      <form style="margin-left: 5px" action="{{ route('pedidos.edit', ['id_pedido' => $pedidos->id_pedido]) }}">
+                        @csrf
                         <button type="submit" class="btn btn-info">Editar</button>
                       </form>
+                      </div>
+
                     </td>
                   </tr>
                   @endforeach

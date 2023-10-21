@@ -69,7 +69,7 @@
   </div>
 
     <div class="row">
-        <div style="margin-left: 30px; border: solid rgb(43, 43, 43) 1px;">
+        <div style="margin-left: 30px;">
             <table style="width: 1200px; height: auto;" class="table table-striped">
               <thead> 
                 <tr>

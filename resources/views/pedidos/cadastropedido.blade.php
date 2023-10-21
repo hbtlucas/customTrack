@@ -89,17 +89,17 @@
           <div class="form-group">
             <label for="status_pedido">Status do pedido: </label>
             <select name="status_pedido" class="form-control">
-              <option value="Andamento">Andamento</option>
-              <option value="Aprovacao">Aguardando Aprovação</option>
-              <option value="Concluido">Concluido</option>
+              <option value="andamento">Andamento</option>
+              <option value="aprovacao">Aguardando Aprovação</option>
+              <option value="concluido">Concluido</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="status_pagamento">Status do pagamento </label>
             <select name="status_pagamento" class="form-control" id="status_pagamento">
-              <option value="Aprovado">Aprovado</option>
-              <option value="Aguardando">Em falta</option>
+              <option value="aprovado">Aprovado</option>
+              <option value="andamento">Em falta</option>
             </select>
           </div>
           

@@ -9,7 +9,7 @@ class pedidos extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_pedidos';
+    protected $primaryKey = 'id_pedido';
     public $timestamps = false;
     protected $guarded = [];
 
