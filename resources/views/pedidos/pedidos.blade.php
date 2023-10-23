@@ -51,8 +51,7 @@
     <a href="{{ route('clientes') }}">Clientes</a>
     <a href="{{ route('pedidos') }}" class="active">Pedidos</a>
     <a href="{{route('produtos')}}">Produtos</a>
-    <a href="faturas">Faturas</a>
-    <a href="relatorios">Relatórios</a>
+    <a href="{{route('relatorios')}}">Relatórios</a>
   </div>
 
   <!-- Conteúdo da página -->
@@ -66,6 +65,16 @@
       <form style="margin: 10px;" method="" action="{{ route('pedidos.cadastropedido') }}">
         <button class="btn btn-dark" type="submit">Cadastrar Pedido</button>
       </form>
+
+      <form style="margin: 10px" action="">
+        <div class="form-group d-flex gap-2">
+          <input class="form-control" type="text" name="pesquisar" id="pesquisar">&nbsp;
+          <button class="btn btn-info d-flex align-items-center" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg></button>
+        </div>
+    </form>
+    
   </div>
 
     <div class="row">
@@ -97,7 +106,9 @@
                     <td>{{$pedidos->valor_pedido}}</td>
                     <td>
                       <div class="row">
-                      <form style="margin-left: 5px" action="">
+                      <form style="margin-left: 5px" action="{{ route('pedidos.delete',['id_pedido' => $pedidos->id_pedido]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
                         <button type="submit" class="btn btn-danger">Deletar</button>
                       </form>
 

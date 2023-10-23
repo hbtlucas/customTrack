@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\produtos;
+use App\Models\pedidos;
+
 
 
 class ProdutosController extends Controller
@@ -40,13 +42,18 @@ class ProdutosController extends Controller
     }
 
     public function delete($id_produto){
-        $produto = produtos::find($id_produto);
-        if($produto){
-            $produto->delete();
-            return redirect()->route('produtos');
-        } else {
-            return redirect()->route('produtos');
+        $erroproduto = "Erro! Delete esse produto da tabela pedidos antes de deletar aqui!";
+
+        $produtos = produtos::find($id_produto);
+        $produtosassociados = pedidos::where('id_produto', $id_produto)->get();
+
+        if($produtosassociados->count()>0) {
+          abort(403, $erroproduto);
         }
+
+        $produtos->delete();
+        return redirect()->route('produtos');
+      }
     }
   
-}
+

@@ -49,78 +49,60 @@
   <div class="sidebar">
         <span style="margin-left: 25px; font-size: 30px; color: rgb(255, 255, 255);">Custom</span>
         <span style="font-size: 30px; color: rgb(255, 0, 0);">Track</span>
-    <a href="clientes.html">Clientes</a>
-    <a href="pedidos.html">Pedidos</a>
-    <a href="produtos.html">Produtos</a>
-    <a href="faturas.html">Faturas</a>
-    <a href="relatorios.html" class="active">Relatórios</a>
+    <a href="{{route('clientes')}}">Clientes</a>
+    <a href="{{route('pedidos')}}">Pedidos</a>
+    <a href="{{route('produtos')}}">Produtos</a>
+    <a href="{{route('relatorios')}}" class="active">Relatórios</a>
   </div>
 
   <!-- Conteúdo da página -->
   <div class="content">
 
     <div class="row">
-        <form style="margin: 10px" method="" action="index.html">
-          <button style="background-color: #808080;" class="btn" type="submit">Home</button>
+        <form style="margin: 10px" method="GET" action="{{route('index')}}">
+          <button style="" class="btn #546e7a blue-grey darken-1" type="submit">Home</button>
         </form>
   
-        <form style="margin: 10px;" method="" action="novorelatorio.html">
-          <button style="background-color: #808080" class="btn" type="submit">Adicionar Relatório</button>
+        <form style="margin: 10px;" method="GET" action="{{ route('relatorios.cadastro') }}">
+          @csrf
+          <button style="" class="btn #546e7a blue-grey darken-1" type="submit">Adicionar Relatório</button>
         </form>
+
     </div>
   
-
+    @foreach ($relatorios as $relatorios)
         <div class="row">
           <div class="col s12 m6">
             <div class="card">
               <div class="card-content">
-                <span class="card-title">Titulo do relatorio</span>
-                <span class="card-subtitle">Cliente 1</span>
-                <p>Este é um exemplo de conteúdo dentro do card. Você pode adicionar texto, imagens, botões e outros elementos aqui.</p>
+                <span class="card-title">{{$relatorios->titulo}}</span>
+                <span class="card-subtitle">Cliente: {{$relatorios->cliente}}</span>
+                <p>{{$relatorios->texto}}</p>
               </div>
               <div class="card-action">
-                <a href="#">Editar</a>
-                <a href="#">Deletar</a>
+
+                <div class="row">
+                  <div style="margin-left: 10px">
+                    <form action="{{ route('relatorios.edit',['id'=>$relatorios->id]) }}">
+                      @csrf
+                      <button type="submit" class="btn #37474f blue-grey darken-3" >Editar</button>
+                    </form>
+                  </div>
+
+                  <div style="margin-left: 10px">
+                    <form action="{{ route('relatorios.delete',['id'=>$relatorios->id]) }}" method="POST">
+                      @csrf
+                      @method ('DELETE')
+                        <button type="submit" class="btn red" >Deletar</button>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      
+        @endforeach
 
-      <div class="row">
-        <div class="col s12 m6">
-          <div class="card">
-            <div class="card-content">
-              <span class="card-title">Titulo do relatorio</span>
-              <span class="card-subtitle">Cliente 1</span>
-              <p>Este é um exemplo de conteúdo dentro do card. Você pode adicionar texto, imagens, botões e outros elementos aqui.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">Editar</a>
-              <a href="#">Deletar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-    
-      <div class="row">
-        <div class="col s12 m6">
-          <div class="card">
-            <div class="card-content">
-              <span class="card-title">Titulo do relatorio</span>
-              <span class="card-subtitle">Cliente 1</span>
-              <p>Este é um exemplo de conteúdo dentro do card. Você pode adicionar texto, imagens, botões e outros elementos aqui.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">Editar</a>
-              <a href="#">Deletar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-    
     </div>
 </body>
 </html>

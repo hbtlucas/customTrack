@@ -51,8 +51,7 @@
     <a href="{{ route('clientes') }}">Clientes</a>
     <a href="{{ route('pedidos') }}" class="active">Pedidos</a>
     <a href="{{route('produtos')}}">Produtos</a>
-    <a href="faturas">Faturas</a>
-    <a href="relatorios">Relatórios</a>
+    <a href="{{route('relatorios')}}">Relatórios</a>
   </div>
 
   <!-- Conteúdo da página -->

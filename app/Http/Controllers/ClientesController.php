@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\clientes;
+use App\Models\pedidos;
+
 
 class ClientesController extends Controller
 {
@@ -45,13 +47,17 @@ class ClientesController extends Controller
 
       public function deletecliente($id_cliente)
       {
+        $errocliente = "Erro! Delete esse cliente da tabela pedidos antes de deletar aqui!";
+
         $cliente = clientes::find($id_cliente);
-        if($cliente){
-          $cliente->delete();
-          return redirect()->route('clientes');
-        } else {
-          return redirect()->route('clientes');
+        $clientesassociados = pedidos::where('id_cliente', $id_cliente)->get();
+
+        if($clientesassociados->count()>0) {
+          abort(403, $errocliente);
         }
+
+        $cliente->delete();
+        return redirect()->route('clientes');
       }
   
 }

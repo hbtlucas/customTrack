@@ -23,7 +23,6 @@ Route::prefix('/clientes')->group(function(){
     Route::get('/editcliente/{id_cliente}',[\App\Http\Controllers\ClientesController::class, 'editcliente'])->name('clientes.editcliente');
     Route::put('/editcliente/{id_cliente}',[\App\Http\Controllers\ClientesController::class, 'updatecliente'])->name('clientes.update');
     Route::delete('/{id_cliente}',[\App\Http\Controllers\ClientesController::class, 'deletecliente'])->name('clientes.delete');
-
 });
 
 Route::prefix('/pedidos')->group(function(){
@@ -33,6 +32,8 @@ Route::prefix('/pedidos')->group(function(){
     Route::post('/cadastropedido',[\App\Http\Controllers\PedidosController::class, 'store'])->name('pedidos.store');
     Route::get('/editpedido/{id_pedido}',[\App\Http\Controllers\PedidosController::class, 'edit'])->name('pedidos.edit');
     Route::put('/editpedido/{id_pedido}',[\App\Http\Controllers\PedidosController::class, 'update'])->name('pedidos.update');
+    Route::delete('/{id_pedido}',[\App\Http\Controllers\PedidosController::class, 'delete'])->name('pedidos.delete');
+
 });
 
 Route::prefix('/produtos')->group(function(){
@@ -43,4 +44,16 @@ Route::prefix('/produtos')->group(function(){
     Route::get('/editproduto/{id_produto}',[\App\Http\Controllers\ProdutosController::class, 'editprodutos'])->name('produtos.edit');
     Route::put('/editproduto/{id_produto}',[\App\Http\Controllers\ProdutosController::class, 'update'])->name('produtos.update');
     Route::delete('/{id_produto}',[\App\Http\Controllers\ProdutosController::class, 'delete'])->name('produtos.delete');
+});
+
+Route::prefix('/relatorios')->group(function(){
+    Route::get('/',[\App\Http\Controllers\RelatoriosController::class, 'relatorios'])->name('relatorios');
+    Route::get('/',[\App\Http\Controllers\RelatoriosController::class, 'listar'])->name('relatorios');
+    Route::get('/cadastrorelatorio',[\App\Http\Controllers\RelatoriosController::class, 'cadastro'])->name('relatorios.cadastro');
+    Route::post('/cadastrorelatorio',[\App\Http\Controllers\RelatoriosController::class, 'store'])->name('relatorios.store');
+    Route::get('/editrelatorio/{id}',[\App\Http\Controllers\RelatoriosController::class, 'edit'])->name('relatorios.edit');
+    Route::put('/editrelatorio/{id}',[\App\Http\Controllers\RelatoriosController::class, 'update'])->name('relatorios.update');
+    Route::delete('/{id}',[\App\Http\Controllers\RelatoriosController::class, 'delete'])->name('relatorios.delete');
+
+
 });

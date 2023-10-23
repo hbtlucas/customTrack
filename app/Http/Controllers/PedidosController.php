@@ -26,8 +26,8 @@ class PedidosController extends Controller
 
         if(!$cliente) {
             //cliente não encontrado
-            $html = "<html><h1 style='color:red'>Error 404! Client not found </h1> </html>";
-            return $html;
+            $error404 = "Client not found";
+            abort(404, $error404);
 
         } else {
             $nomeProduto = $request->input('produto');
@@ -35,8 +35,8 @@ class PedidosController extends Controller
 
             if(!$produtos){
                 //produto nao encontrado
-                $html = "<html><h1 style='color:red'>Error 404! Item not found </h1> </html>";
-                return $html;
+                $error404 = "Produto not found";
+                abort(404, $error404);    
 
             } else {
                 $quantidade = $request->input('quantidade');
@@ -77,20 +77,47 @@ class PedidosController extends Controller
     }
 
     public function update(Request $request, $id_pedido){
+        $error404 = "NOT FOUND";
         $pedidos = pedidos::find($id_pedido);
+        $emailCliente = $request->input('email-cliente');
+        $clientes = clientes::where('email', $emailCliente)->first();
+        
+        if(!$clientes){
+            abort(404, $error404);
+        } else {
+            $nomeProduto = $request->input('produto');
+            $produtos = produtos::where('nome_produto', $nomeProduto)->first();
+
+            if(!$produtos) {
+                abort(404, $error404);
+            } else {
+                $quantidade = $request->input('quantidade');
+                $valor_produto = $pedidos->produtos->valor_produto;
     
-        $pedidos->clientes->email = $request->input('email-cliente');
-        $pedidos->produtos->nome_produto = $request->input('produto');
-        $pedidos->quantidade = $request->input('quantidade');
-        $pedidos->id_forma_pagamento = $request->input('id_forma_pagamento');
-        $pedidos->status_pedido = $request->input('status_pedido');
-        $pedidos->status_pagamento = $request->input('status_pagamento');
-
-        $pedidos->save();
-        return redirect()->route('pedidos');
+                $valor_pedido = $valor_produto * $quantidade;
+    
+                $pedidos->id_cliente = $clientes->id_cliente;
+                $pedidos->id_produto = $produtos->id_produto;
+                $pedidos->id_forma_pagamento = $request->input('id_forma_pagamento');
+                $pedidos->valor_pedido = $valor_pedido;
+                $pedidos->status_pagamento = $request->input('status_pagamento');
+                $pedidos->status_pedido = $request->input('status_pedido');
+                $pedidos->quantidade = $quantidade;
+            
+                $pedidos->save();
+                return redirect()->route('pedidos');
+            }
+        }
+        
     }
 
-    public function delete(){
-
-    }
+    public function delete($id_pedido){
+        $pedidos = pedidos::find($id_pedido);
+        if($pedidos){
+            $pedidos->delete();
+          return redirect()->route('pedidos');
+        } else {
+          return redirect()->route('pedidos');
+        }
+      }
 }

@@ -5,7 +5,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <style>
     /* Estilos para a sidebar */
     .sidebar {
@@ -52,28 +51,34 @@
     <a href="{{ route('clientes') }}">Clientes</a>
     <a href="{{ route('pedidos') }}">Pedidos</a>
     <a href="{{route('produtos')}}">Produtos</a>
-    <a href="{{route('relatorios')}}">Relatórios</a>
+    <a href="{{route('relatorios')}} "class="active">Relatórios</a>
   </div>
 
   <!-- Conteúdo da página -->
+
   <div class="content">
-    <div class="row">
-        <div style="margin-left: 30px;">
-            <div style="padding: 20px; border: solid 1px rgb(85, 85, 85) ;" class="card">
-              <div class="card-image">
-                <img style="width: 600px; height: auto;" src="{{asset('imagens/5012404.jpg')}}" alt="Imagem de fundo">
-              </div>
-              <div class="card-content">
-                <p>Essa aplicação tem como objetivo servir como um Gerenciador de Controle e Produção. <br>
-                Ela foi pensada para empresas que produzem soluções de softwares personalizados,<br> mas 
-                pode ser adaptada para qualquer empresa que necessite de um sistema <br> de gerenciamento.</p>
-              </div>
-              <div class="card-action">
-                <a href="{{route('clientes')}}">Vamos lá!</a>
-              </div>
-            </div>
-        </div>
-    </div>
+        <h2>Adicionar novo relatório</h2>
+        <form action="{{ route('relatorios.update',['id'=>$relatorios->id]) }}" method="POST">
+          @csrf
+          @method('PUT')
+          <div class="form-group">
+            <label for="titulo">Título do relatório</label>
+            <input style="width: 300px" name="titulo" type="text" value="{{$relatorios->titulo}}" class="form-control" id="titulorelatorio">
+          </div>
+
+          <div class="form-group">
+            <label for="cliente">Cliente </label>
+            <input style="width: 300px" name="cliente" type="text" class="form-control" value="{{$relatorios->cliente}}" id="cliente">
+          </div>
+
+          <div class="form-group">
+            <label for="texto">Relatório</label>
+            <input name="texto" type="text" class="form-control" value="{{$relatorios->texto}}" id="texto">  
+          </div>
+          
+          <button type="submit" class="btn btn-dark">Cadastrar</button>
+        </form>
+      </div>
 </div>
 </body>
 </html>
