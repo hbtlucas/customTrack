@@ -48,8 +48,8 @@
   <div class="sidebar">
         <span style="margin-left: 25px; font-size: 30px; color: rgb(255, 255, 255);">Custom</span>
         <span style="font-size: 30px; color: rgb(255, 0, 0);">Track</span>
-    <a href="{{ route('clientes') }}" class="active">Clientes</a>
-    <a href="{{ route('pedidos') }}">Pedidos</a>
+    <a href="{{ route('clientes') }}">Clientes</a>
+    <a href="{{ route('pedidos') }}" class="active">Pedidos</a>
     <a href="{{route('produtos')}}">Produtos</a>
     <a href="{{route('relatorios')}}">Relatórios</a>
   </div>
@@ -58,69 +58,69 @@
   <div class="content">
 
     <div style="padding: 20px;" class="row">
-
       <form style="margin: 10px;" method="" action="{{ route('index') }}">
         <button class="btn btn-dark" type="submit">Home</button>
       </form>
 
-      <form style="margin: 10px;" method="" action="{{route('clientes.cadastroclientes')}}">
-        <button class="btn btn-dark" type="submit">Cadastrar Cliente</button>
+      <form style="margin: 10px;" method="" action="{{ route('pedidos.cadastropedido') }}">
+        <button class="btn btn-dark" type="submit">Cadastrar Pedido</button>
       </form>
 
-      <form style="margin: 10px" action="{{ route('clientes.search') }}" method="GET">
-        @csrf
-          <div class="form-group d-flex gap-2">
-            <input class="form-control" type="text" name="search" placeholder="pesquisar" id="search">&nbsp;
-            <button class="btn btn-info d-flex align-items-center" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg></button>
-          </div>
-      </form>
+      <form style="margin: 10px" action="">
+        <div class="form-group d-flex gap-2">
+          <input class="form-control" type="text" name="pesquisar" id="pesquisar">&nbsp;
+          <button class="btn btn-info d-flex align-items-center" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg></button>
+        </div>
+    </form>
+    
   </div>
 
     <div class="row">
         <div style="margin-left: 30px;">
-            <table style="width: 1200px; height: auto;" class="table table-striped">
+            <table class="table table-striped">
               <thead> 
                 <tr>
                   <th>Id</th>
-                  <th>Nome</th>
-                  <th>Telefone</th>
-                  <th>Email</th>
-                  <th>CPF</th>
+                  <th>Nome do cliente</th>
+                  <th>Nome do produto</th>
+                  <th>Quantidade</th>
+                  <th>Forma de pagamento</th>
+                  <th>Status do pedido</th>
+                  <th>Status do pagamento</th>
+                  <th>Valor Final</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($clientes as $cliente)
-                <tr>
-                  <td>{{ $cliente->id_cliente}}</td>
-                  <td>{{ $cliente->nome_cliente}}</td>
-                  <td>{{ $cliente->telefone}}</td>
-                  <td>{{ $cliente->email}}</td>
-                  <td>{{ $cliente->cpf}}</td>
-                  <td>
-                    <div class="row">
-
-                    <div style="margin-left: 10px">
-                      <form action="{{ route('clientes.delete', ['id_cliente' => $cliente->id_cliente]) }}" method="POST">
+                @foreach ($pedidos as $pedidos)                    
+                  <tr>
+                    <td>{{$pedidos->id_pedido}}</td>
+                    <td>{{$pedidos->clientes->nome_cliente}}</td>
+                    <td>{{$pedidos->produtos->nome_produto}}</td>
+                    <td>{{$pedidos->quantidade}}</td>
+                    <td>{{$formasPagamento[$pedidos->id_forma_pagamento]}}</td>
+                    <td>{{$pedidos->status_pedido}}</td>
+                    <td>{{$pedidos->status_pagamento}}</td>
+                    <td>{{$pedidos->valor_pedido}}</td>
+                    <td>
+                      <div class="row">
+                      <form style="margin-left: 5px" action="{{ route('pedidos.delete',['id_pedido' => $pedidos->id_pedido]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Deletar</button>
                       </form>
-                    </div>
 
-                    <div style="margin-left: 10px">
-                      <form action="{{ route('clientes.editcliente', ['id_cliente' => $cliente->id_cliente]) }}">
+                      <form style="margin-left: 5px" action="{{ route('pedidos.edit', ['id_pedido' => $pedidos->id_pedido]) }}">
                         @csrf
                         <button type="submit" class="btn btn-info">Editar</button>
                       </form>
-                    </div>
+                      </div>
 
-                    </div>
-                  </td>
-                </tr>
-                @endforeach
+                    </td>
+                  </tr>
+                  @endforeach
               </tbody>
           </table>
         </div>

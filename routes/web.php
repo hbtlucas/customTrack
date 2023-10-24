@@ -18,6 +18,7 @@ Route::get('/',[\App\Http\Controllers\IndexController::class, 'index'])->name('i
 Route::prefix('/clientes')->group(function(){
     Route::get('/',[\App\Http\Controllers\ClientesController::class, 'clientes'])->name('clientes');
     Route::get('/',[\App\Http\Controllers\ClientesController::class, 'listarClientes'])->name('clientes');
+    Route::get('/search',[\App\Http\Controllers\ClientesController::class, 'search'])->name('clientes.search');
     Route::get('/cadastrocliente',[\App\Http\Controllers\ClientesController::class, 'cadastroclientes'])->name('clientes.cadastroclientes');
     Route::post('/cadastrocliente',[\App\Http\Controllers\ClientesController::class, 'store'])->name('clientes.store');
     Route::get('/editcliente/{id_cliente}',[\App\Http\Controllers\ClientesController::class, 'editcliente'])->name('clientes.editcliente');
@@ -28,6 +29,7 @@ Route::prefix('/clientes')->group(function(){
 Route::prefix('/pedidos')->group(function(){
     Route::get('/',[\App\Http\Controllers\PedidosController::class, 'pedidos'])->name('pedidos');
     Route::get('/',[\App\Http\Controllers\PedidosController::class, 'listarpedidos'])->name('pedidos');
+    Route::get('/search',[\App\Http\Controllers\PedidosController::class, 'search'])->name('pedidos.search');
     Route::get('/cadastropedido',[\App\Http\Controllers\PedidosController::class, 'cadastropedido'])->name('pedidos.cadastropedido');
     Route::post('/cadastropedido',[\App\Http\Controllers\PedidosController::class, 'store'])->name('pedidos.store');
     Route::get('/editpedido/{id_pedido}',[\App\Http\Controllers\PedidosController::class, 'edit'])->name('pedidos.edit');

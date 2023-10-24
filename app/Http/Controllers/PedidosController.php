@@ -120,4 +120,31 @@ class PedidosController extends Controller
           return redirect()->route('pedidos');
         }
       }
+
+      public function search(Request $request){
+
+        $formasPagamento = [
+            1 => 'Pix',
+            2 => 'Cartão de Crédito',
+            3 => 'Cartão de Débito',
+            4 => 'Dinheiro Físico',
+        ];
+
+        $search = $request->search;
+
+            $pedidos = pedidos::where(function ($query) use ($search) {
+                $query->where('status_pedido', 'like', '%' . $search . '%')
+                      ->orWhere('id_pedido', 'like', '%' . $search . '%')
+                      ->orWhere('quantidade', 'like', '%' . $search . '%')
+                      ->orWhere('status_pagamento', 'like', '%' . $search . '%')
+                      ->orWhere('id_forma_pagamento', 'like', '%' . $search . '%')
+                      ->orWhere('valor_pedido', 'like', '%' . $search . '%');
+            })->orWhereHas('clientes', function ($query) use ($search) {
+                $query->where('nome_cliente', 'like', '%' . $search . '%');
+            })->orWhereHas('produtos', function ($query) use ($search) {
+                $query->where('nome_produto', 'like', '%' . $search . '%');
+            })->get();
+
+        return view ('pedidos.search', compact('pedidos', 'formasPagamento'));
+      }
 }

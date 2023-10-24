@@ -76,7 +76,7 @@
             <input name="texto" type="text" class="form-control" value="{{$relatorios->texto}}" id="texto">  
           </div>
           
-          <button type="submit" class="btn btn-dark">Cadastrar</button>
+          <button type="submit" class="btn btn-dark">Salvar</button>
         </form>
       </div>
 </div>

@@ -9,9 +9,10 @@ use App\Models\pedidos;
 
 class ClientesController extends Controller
 {
-    public function clientes()
+    public function clientes(Request $request)
     {
         return view('clientes.clientes');
+
     }   
     
     public function cadastroclientes()
@@ -60,4 +61,18 @@ class ClientesController extends Controller
         return redirect()->route('clientes');
       }
   
+      public function search(Request $request){
+        $search = $request->search;
+
+        $clientes = clientes::where(function ($query) use ($search){
+          $query->where('nome_cliente', 'like', '%'. $search . '%')
+          ->orWhere('cpf', 'like', '%' . $search . '%')
+          ->orWhere('telefone', 'like', '%' . $search . '%')
+          ->orWhere('email', 'like', '%' . $search . '%')
+          ->orWhere('id_cliente', 'like', '%' . $search . '%');
+
+        })->get();
+        
+        return view('clientes.search', compact('clientes'));
+      }
 }
