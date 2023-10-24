@@ -54,6 +54,19 @@ class ProdutosController extends Controller
         $produtos->delete();
         return redirect()->route('produtos');
       }
+
+      public function search(Request $request){
+
+        $search = $request->search;
+
+        $produtos = produtos::where(function ($query) use ($search) {
+            $query->where('nome_produto', 'like', '%' . $search . '%')
+            ->orWhere('valor_produto', 'like', '%' . $search . '%')
+            ->orWhere('categoria', 'like', '%' . $search . '%')
+            ->orWhere('id_produto', 'like', '%' . $search . '%');
+        })->get();
+        return view ('produtos.search',compact('produtos'));
+      }
     }
   
 
