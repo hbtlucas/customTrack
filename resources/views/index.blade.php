@@ -42,6 +42,15 @@
       margin-left: 250px;
       padding: 20px;
     }
+
+    .user {
+    position: absolute; /* Posição absoluta para que o nome de usuário não afete o fluxo do conteúdo */
+    margin-bottom: 20px;
+    bottom: 0; /* Alinhar na parte inferior da barra lateral */
+    font-size: 25px;
+    color: red;
+    font-weight: 700;
+}
   </style>
 </head>
 <body>
@@ -53,12 +62,21 @@
     <a href="{{ route('pedidos') }}">Pedidos</a>
     <a href="{{route('produtos')}}">Produtos</a>
     <a href="{{route('relatorios')}}">Relatórios</a>
-  </div>
+
+    <div class="user">
+      <span style="margin-left: 25px; font-size: 25px; color: rgb(255, 0, 0)">{{ session('user') }}</span>
+    </div>  
+</div>
 
   <!-- Conteúdo da página -->
   <div class="content">
     <div class="row">
         <div style="margin-left: 30px;">
+          <div>
+              @if (session('user'))
+              <h3>Seja bem-vindo, {{session('user')}}!</h3>
+              @endif
+          </div>
             <div style="padding: 20px; border: solid 1px rgb(85, 85, 85) ;" class="card">
               <div class="card-image">
                 <img style="width: 600px; height: auto;" src="{{asset('imagens/5012404.jpg')}}" alt="Imagem de fundo">

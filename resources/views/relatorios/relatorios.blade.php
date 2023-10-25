@@ -42,6 +42,14 @@
       margin-left: 250px;
       padding: 20px;
     }
+    .user {
+    position: absolute;
+    margin-bottom: 20px;
+    bottom: 0; 
+    font-size: 25px;
+    color: red;
+    font-weight: 700;
+}
   </style>
 </head>
 <body>
@@ -53,6 +61,10 @@
     <a href="{{route('pedidos')}}">Pedidos</a>
     <a href="{{route('produtos')}}">Produtos</a>
     <a href="{{route('relatorios')}}" class="active">Relatórios</a>
+
+    <div class="user">
+      <span style="margin-left: 25px; font-size: 25px; color: rgb(255, 0, 0)">{{ session('user') }}</span>
+    </div>  
   </div>
 
   <!-- Conteúdo da página -->

@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/',[\App\Http\Controllers\IndexController::class, 'index'])->name('index');
+Route::get('/',[\App\Http\Controllers\IndexController::class, 'user'])->name('user');
+Route::post('/iniciarsessao',[\App\Http\Controllers\IndexController::class, 'iniciarsessao'])->name('iniciarsessao');
+Route::get('/index',[\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
 Route::prefix('/clientes')->group(function(){
     Route::get('/',[\App\Http\Controllers\ClientesController::class, 'clientes'])->name('clientes');
