@@ -72,14 +72,30 @@
         <h2>Cadastro de Pedido</h2>
         <form action="{{route('pedidos.store')}}" method="POST">
           @csrf
-          <div class="form-group">
-            <label for="email-cliente">Email do Cliente:</label>
-            <input name="email-cliente" type="email" class="form-control" id="email-cliente" placeholder="Digite o email do cliente que está fazendo o pedido">
+            <div class="form-group">
+              <label for="id_cliente">Cliente:</label>
+              <select name="id_cliente" class="form-control" id="id_cliente" required>
+                  <option value="">Selecione um cliente</option>
+                  @foreach ($clientes as $cliente)
+                      <option value="{{ $cliente->id_cliente }}">{{ $cliente->nome_cliente }} ({{ $cliente->email }})</option>
+                  @endforeach
+              </select>
+              @error('id_cliente')
+                  <span class="text-danger">{{ $message }}</span>
+              @enderror
           </div>
 
           <div class="form-group">
-            <label for="produto">Nome do produto:</label>
-            <input name="produto" type="text" class="form-control" id="produto" placeholder="Digite o nome do produto">
+            <label for="produto">Produto:</label>
+            <select name="id_produto" class="form-control" id="id_produto" required>
+              <option value="">Selecione um produto</option>
+              @foreach ($produtos as $produto)
+                <option value="{{ $produto->id_produto}}"> {{ $produto-> nome_produto }}</option>
+              @endforeach
+            </select>
+            @error('id_produto')
+                  <span class="text-danger">{{ $message }}</span>
+            @enderror
           </div>
 
           <div class="form-group">

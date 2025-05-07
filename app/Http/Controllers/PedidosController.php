@@ -15,48 +15,48 @@ class PedidosController extends Controller
         return view('pedidos.pedidos');
     }    
 
-    public function cadastropedido(){
-        return view('pedidos.cadastropedido');
+    public function cadastropedido()
+    {
+        // Recuperar todos os clientes
+        $clientes = clientes::all();
+        $produtos = produtos::all();
+        return view('pedidos.cadastropedido', compact('clientes', 'produtos'));
     }
 
-    public function store(Request $request){
-        $emailCliente = $request->input('email-cliente');
+    public function store(Request $request)
+        {
+            // Validar os dados do formulário
+            $request->validate([
+                'id_cliente' => 'required|exists:clientes,id_cliente',
+                'id_produto' => 'required|exists:produtos,id_produto',
+                'quantidade' => 'required|integer|min:1',
+                'id_forma_pagamento' => 'required|in:1,2,3,4',
+            ]);
 
-        $cliente = clientes::where('email', $emailCliente)->first();
+            // Buscar o cliente pelo id_cliente
+            $cliente = clientes::find($request->input('id_cliente'));
 
-        if(!$cliente) {
-            //cliente não encontrado
-            $error404 = "Client not found";
-            abort(404, $error404);
+            // Buscar o produto pelo id_produto
+            $produto = produtos::find($request->input('id_produto'));
 
-        } else {
-            $nomeProduto = $request->input('produto');
-            $produtos = produtos::where('nome_produto', $nomeProduto)->first();
+            // Calcular o valor do pedido
+            $quantidade = $request->input('quantidade');
+            $valor_produto = $produto->valor_produto;
+            $valor_pedido = $valor_produto * $quantidade;
 
-            if(!$produtos){
-                //produto nao encontrado
-                $error404 = "Produto not found";
-                abort(404, $error404);    
+            // Criar o pedido
+            $pedido = pedidos::create([
+                'id_cliente' => $cliente->id_cliente,
+                'id_produto' => $produto->id_produto,
+                'id_forma_pagamento' => $request->input('id_forma_pagamento'),
+                'valor_pedido' => $valor_pedido,
+                'quantidade' => $quantidade,
+                'status_pedido' => 'Pendente', // Valor padrão, ajuste conforme necessário
+                'status_pagamento' => 'Aguardando', // Valor padrão, ajuste conforme necessário
+            ]);
 
-            } else {
-                $quantidade = $request->input('quantidade');
-                $valor_produto = $produtos->valor_produto;
-
-                $valor_pedido = $valor_produto * $quantidade;
-                $pedido = pedidos::create(
-                    [
-                        'id_cliente' => $cliente->id_cliente,
-                        'id_produto' => $produtos->id_produto,
-                        'id_forma_pagamento' => $request->input('id_forma_pagamento'),
-                        'valor_pedido' => $valor_pedido,
-                        'status_pedido' => $request->input('status_pedido'),
-                        'status_pagamento' => $request->input('status_pagamento'),
-                        'quantidade' => $quantidade
-                    ]);
-                return redirect()->route('pedidos');
-            }
+            return redirect()->route('pedidos')->with('success', 'Pedido cadastrado com sucesso!');
         }
-    }
 
     public function listarpedidos(){
         $pedidos = pedidos::all(); // recuperando parametros da tabela
