@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 // Rota raiz do Breeze (página welcome)
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 // Rotas de autenticação do Breeze (login, register, logout, etc.)
