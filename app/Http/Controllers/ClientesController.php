@@ -65,13 +65,15 @@ class ClientesController extends Controller
         $search = $request->search;
 
         $clientes = clientes::where(function ($query) use ($search){
-          $query->where('nome_cliente', 'like', '%'. $search . '%')
-          ->orWhere('cpf', 'like', '%' . $search . '%')
-          ->orWhere('telefone', 'like', '%' . $search . '%')
-          ->orWhere('email', 'like', '%' . $search . '%')
-          ->orWhere('id_cliente', 'like', '%' . $search . '%');
+          $query->where('nome_cliente', 'ilike', '%'. $search . '%')
+          ->orWhere('cpf', 'ilike', '%' . $search . '%')
+          ->orWhere('telefone', 'ilike', '%' . $search . '%')
+          ->orWhere('email', 'ilike', '%' . $search . '%')
+          ->orWhere('id_cliente', 'ilike', '%' . $search . '%');
 
-        })->get();
+        })
+        ->orderBy('id_cliente', 'desc')
+        ->get();
         
         return view('clientes.search', compact('clientes'));
       }

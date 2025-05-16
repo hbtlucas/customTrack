@@ -99,7 +99,7 @@ class PedidosController extends Controller
         return redirect()->route('pedidos');
     }
 
-    public function search(Request $request) {
+    public function search(Request $request){
         $formasPagamento = [
             1 => 'Pix',
             2 => 'Cartão de Crédito',
@@ -107,30 +107,33 @@ class PedidosController extends Controller
             4 => 'Dinheiro Físico',
         ];
 
-        $search = trim($request->input('search', ''));
+        $search = $request->search;
 
-        $pedidos = pedidos::with(['clientes', 'produtos'])
-            ->when($search, function ($query, $search) {
-                $query->where(function ($q) use ($search) {
-                    $q->whereRaw('LOWER(status_pedido) LIKE ?', ['%' . strtolower($search) . '%'])
-                      ->orWhereRaw('LOWER(status_pagamento) LIKE ?', ['%' . strtolower($search) . '%']);
-                    if (is_numeric($search)) {
-                        $q->orWhere('id_pedido', $search)
-                          ->orWhere('quantidade', $search)
-                          ->orWhere('id_forma_pagamento', $search);
-                        $q->orWhereBetween('valor_pedido', [$search - 0.01, $search + 0.01]);
-                    }
-                })
-                ->orWhereHas('clientes', function ($q) use ($search) {
-                    $q->whereRaw('LOWER(nome_cliente) LIKE ?', ['%' . strtolower($search) . '%']);
-                })
-                ->orWhereHas('produtos', function ($q) use ($search) {
-                    $q->whereRaw('LOWER(nome_produto) LIKE ?', ['%' . strtolower($search) . '%']);
-                });
-            })
-            ->orderBy('id_pedido', 'desc')
-            ->get();
+        // Encontrar IDs das formas de pagamento que correspondem ao texto de busca
+        $formaPagamentoIds = array_keys(array_filter($formasPagamento, function ($forma) use ($search) {
+            return stripos($forma, $search) !== false; // Busca case-insensitive no texto
+        }));
 
-        return view('pedidos.search', compact('pedidos', 'formasPagamento', 'search'));
+        $pedidos = Pedidos::where(function ($query) use ($search, $formaPagamentoIds) {
+            $query->where('status_pedido', 'ILIKE', '%' . $search . '%')
+                ->orWhere('id_pedido', 'ILIKE', '%' . $search . '%')
+                ->orWhere('quantidade', 'ILIKE', '%' . $search . '%')
+                ->orWhere('status_pagamento', 'ILIKE', '%' . $search . '%')
+                ->orWhere('valor_pedido', 'ILIKE', '%' . $search . '%');
+
+            // Se houver IDs de formas de pagamento correspondentes, incluir na query
+            if (!empty($formaPagamentoIds)) {
+                $query->orWhereIn('id_forma_pagamento', $formaPagamentoIds);
+            }
+        })->orWhereHas('clientes', function ($query) use ($search) {
+            $query->where('nome_cliente', 'ILIKE', '%' . $search . '%');
+        })->orWhereHas('produtos', function ($query) use ($search) {
+            $query->where('nome_produto', 'ILIKE', '%' . $search . '%');
+        })
+        ->orderBy('id_pedido', 'desc')
+        ->get();
+        
+
+        return view('pedidos.search', compact('pedidos', 'formasPagamento'));
     }
 }

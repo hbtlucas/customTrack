@@ -57,15 +57,16 @@ class ProdutosController extends Controller
       }
 
       public function search(Request $request){
-
         $search = $request->search;
 
         $produtos = produtos::where(function ($query) use ($search) {
-            $query->where('nome_produto', 'like', '%' . $search . '%')
-            ->orWhere('valor_produto', 'like', '%' . $search . '%')
-            ->orWhere('categoria', 'like', '%' . $search . '%')
-            ->orWhere('id_produto', 'like', '%' . $search . '%');
-        })->get();
+            $query->where('nome_produto', 'ilike', '%' . $search . '%')
+            ->orWhere('valor_produto', 'ilike', '%' . $search . '%')
+            ->orWhere('categoria', 'ilike', '%' . $search . '%')
+            ->orWhere('id_produto', 'ilike', '%' . $search . '%');
+        })
+        ->orderBy('id_produto', 'desc')
+        ->get();
         return view ('produtos.search',compact('produtos'));
       }
     }
