@@ -1,123 +1,73 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <style>
-    /* Estilos para a sidebar */
-    .sidebar {
-      height: 100%;
-      width: 250px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #333;
-      padding-top: 20px;
-      color: white;
-    }
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Editar Pedido') }}
+        </h2>
+    </x-slot>
 
-    .sidebar a {
-      padding: 15px 25px;
-      text-decoration: none;
-      font-size: 20px;
-      color: white;
-      display: block;
-      transition: 0.2s;
-    }
-
-    .sidebar a.active {
-    background-color: #ff3c00;
-    color: white;
-    }
-
-    .sidebar a:hover {
-      background-color: #555;
-    }
-
-    /* Estilos para o conteúdo */
-    .content {
-      margin-left: 250px;
-      padding: 20px;
-    }
-    .user {
-    position: absolute;
-    margin-bottom: 20px;
-    bottom: 0; 
-    font-size: 25px;
-    color: red;
-    font-weight: 700;
-}
-  </style>
-</head>
-<body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-        <span style="margin-left: 25px; font-size: 30px; color: rgb(255, 255, 255);">Custom</span>
-        <span style="font-size: 30px; color: rgb(255, 0, 0);">Track</span>
-    <a href="{{ route('clientes') }}">Clientes</a>
-    <a href="{{ route('pedidos') }}" class="active">Pedidos</a>
-    <a href="{{route('produtos')}}">Produtos</a>
-    <a href="{{route('relatorios')}}">Relatórios</a>
-
-    <div class="user">
-      <span style="margin-left: 25px; font-size: 25px; color: rgb(255, 0, 0)">{{ session('user') }}</span>
-    </div>  
-  </div>
-
-  <!-- Conteúdo da página -->
-
-  <div class="content">
-        <h2>Editar Pedido</h2>
-        <form action="{{ route('pedidos.update',['id_pedido'=>$pedidos->id_pedido]) }}" method="POST">
-          @csrf
-          @method ('PUT')
-          <div class="form-group">
-            <label for="email-cliente">Email do cliente</label>
-            <input name="email-cliente" type="email" value="{{$pedidos->clientes->email}}" class="form-control" id="email-cliente" placeholder="Digite o email do cliente que está fazendo o pedido">
-          </div>
-
-          <div class="form-group">
-            <label for="produto">Nome do produto:</label>
-            <input name="produto" type="text" value="{{$pedidos->produtos->nome_produto}}" class="form-control" id="produto" placeholder="Digite o nome do produto">
-          </div>
-
-          <div class="form-group">
-            <label for="quantidade">Quantidade</label>
-            <input name="quantidade" type="number" value="{{$pedidos->quantidade}}" class="form-control" id="quantidade" placeholder="Digite a quantidade">
-          </div>
-          
-          <div class="form-group">
-            <label for="id_forma_pagamento">Forma de Pagamento:</label>
-            <select name="id_forma_pagamento" class="form-control" id="id_forma_pagamento">
-              <option value="1" {{$pedidos->id_forma_pagamento == 1 ? 'selected' : '' }}>Pix</option>
-              <option value="2" {{$pedidos->id_forma_pagamento == 2 ? 'selected' : '' }}>Cartão de Crédito</option>
-              <option value="3" {{$pedidos->id_forma_pagamento == 3 ? 'selected' : '' }}>Cartão de Débito</option>
-              <option value="4" {{$pedidos->id_forma_pagamento == 4 ? 'selected' : '' }}>Dinheiro Físico</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="status_pedido">Status do pedido: </label>
-            <select name="status_pedido" class="form-control">
-              <option value="andamento" {{ $pedidos->status_pedido == 'andamento' ? 'selected' : '' }}>Andamento</option>
-              <option value="aprovacao" {{ $pedidos->status_pedido == 'aprovacao' ? 'selected' : '' }}>Aguardando Aprovação</option>
-              <option value="concluido" {{ $pedidos->status_pedido == 'concluido' ? 'selected' : '' }}>Concluido</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="status_pagamento">Status do pagamento </label>
-            <select name="status_pagamento" class="form-control" id="status_pagamento">
-              <option value="aprovado" {{ $pedidos->status_pagamento == 'aprovado' ? 'selected' : '' }}>Aprovado</option>
-              <option value="andamento" {{ $pedidos->status_pagamento == 'andamento' ? 'selected' : '' }}>Em falta</option>
-            </select>
-          </div>
-          
-          <button type="submit" class="btn btn-dark">Salvar</button>
-        </form>
-      </div>
-</div>
-</body>
-</html>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form action="{{ route('pedidos.update', ['id_pedido' => $pedidos->id_pedido]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-4">
+                            <label for="id_cliente" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cliente</label>
+                            <select name="id_cliente" id="id_cliente" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
+                                <option value="">Selecione um cliente</option>
+                                @foreach ($clientes as $cliente)
+                                    <option value="{{ $cliente->id_cliente }}" {{ old('id_cliente', $pedidos->id_cliente) == $cliente->id_cliente ? 'selected' : '' }}>{{ $cliente->nome_cliente }} ({{ $cliente->email }})</option>
+                                @endforeach
+                            </select>
+                            @error('id_cliente') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="id_produto" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Produto</label>
+                            <select name="id_produto" id="id_produto" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
+                                <option value="">Selecione um produto</option>
+                                @foreach ($produtos as $produto)
+                                    <option value="{{ $produto->id_produto }}" {{ old('id_produto', $pedidos->id_produto) == $produto->id_produto ? 'selected' : '' }}>{{ $produto->nome_produto }}</option>
+                                @endforeach
+                            </select>
+                            @error('id_produto') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="quantidade" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Quantidade</label>
+                            <input type="number" name="quantidade" id="quantidade" value="{{ old('quantidade', $pedidos->quantidade) }}" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" placeholder="Digite a quantidade" required>
+                            @error('quantidade') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="id_forma_pagamento" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Forma de Pagamento</label>
+                            <select name="id_forma_pagamento" id="id_forma_pagamento" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
+                                <option value="1" {{ old('id_forma_pagamento', $pedidos->id_forma_pagamento) == '1' ? 'selected' : '' }}>Pix</option>
+                                <option value="2" {{ old('id_forma_pagamento', $pedidos->id_forma_pagamento) == '2' ? 'selected' : '' }}>Cartão de Crédito</option>
+                                <option value="3" {{ old('id_forma_pagamento', $pedidos->id_forma_pagamento) == '3' ? 'selected' : '' }}>Cartão de Débito</option>
+                                <option value="4" {{ old('id_forma_pagamento', $pedidos->id_forma_pagamento) == '4' ? 'selected' : '' }}>Dinheiro Físico</option>
+                            </select>
+                            @error('id_forma_pagamento') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="status_pedido" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status do Pedido</label>
+                            <input type="text" name="status_pedido" id="status_pedido" value="{{ old('status_pedido', $pedidos->status_pedido) }}" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" placeholder="Digite o status do pedido (ex.: Andamento)" required>
+                            @error('status_pedido') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="status_pagamento" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status do Pagamento</label>
+                            <input type="text" name="status_pagamento" id="status_pagamento" value="{{ old('status_pagamento', $pedidos->status_pagamento) }}" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" placeholder="Digite o status do pagamento (ex.: Aprovado)" required>
+                            @error('status_pagamento') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="valor_pedido" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Valor Final</label>
+                            <input type="number" step="0.01" name="valor_pedido" id="valor_pedido" value="{{ old('valor_pedido', $pedidos->valor_pedido) }}" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" placeholder="Digite o valor final" required>
+                            @error('valor_pedido') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                            Salvar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

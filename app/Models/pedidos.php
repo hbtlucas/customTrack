@@ -13,6 +13,16 @@ class pedidos extends Model
     public $timestamps = false;
     protected $guarded = [];
 
+    protected $fillable = [
+        'id_cliente',
+        'id_produto',
+        'quantidade',
+        'id_forma_pagamento',
+        'status_pedido',
+        'status_pagamento',
+        'valor_pedido',
+    ];
+    
     public function clientes()
     {
         return $this->belongsTo(clientes::class, 'id_cliente');

@@ -1,95 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <style>
-    /* Estilos para a sidebar */
-    .sidebar {
-      height: 100%;
-      width: 250px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #333;
-      padding-top: 20px;
-      color: white;
-    }
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Adicionar Produto') }}
+        </h2>
+    </x-slot>
 
-    .sidebar a {
-      padding: 15px 25px;
-      text-decoration: none;
-      font-size: 20px;
-      color: white;
-      display: block;
-      transition: 0.2s;
-    }
-
-    .sidebar a.active {
-    background-color: #ff3c00;
-    color: white;
-    }
-
-    .sidebar a:hover {
-      background-color: #555;
-    }
-
-    /* Estilos para o conteúdo */
-    .content {
-      margin-left: 250px;
-      padding: 20px;
-    }
-    .user {
-    position: absolute;
-    margin-bottom: 20px;
-    bottom: 0; 
-    font-size: 25px;
-    color: red;
-    font-weight: 700;
-}
-  </style>
-</head>
-<body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-        <span style="margin-left: 25px; font-size: 30px; color: rgb(255, 255, 255);">Custom</span>
-        <span style="font-size: 30px; color: rgb(255, 0, 0);">Track</span>
-    <a href="{{route('clientes')}}">Clientes</a>
-    <a href="{{route('pedidos')}}">Pedidos</a>
-    <a href="{{route('produtos')}}" class="active">Produtos</a>
-    <a href="{{route('relatorios')}}">Relatórios</a>
-
-    <div class="user">
-      <span style="margin-left: 25px; font-size: 25px; color: rgb(255, 0, 0)">{{ session('user') }}</span>
-    </div>  
-  </div>
-
-  <!-- Conteúdo da página -->
-
-  <div class="content">
-        <h2>Adicionar novo produto</h2>
-        <form action="{{route('produtos.store')}}" method="POST">
-          @csrf
-          <div class="form-group">
-            <label for="nome_produto">Nome do produto:</label>
-            <input type="text" class="form-control" id="nome_produto" name="nome_produto" placeholder="Digite o nome do produto">
-          </div>
-
-          <div class="form-group">
-            <label for="categoria">Categoria do produto</label>
-            <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Software">
-          </div>
-
-          <div class="form-group">
-            <label for="valor_produto">Valor do produto</label>
-            <input type="number" class="form-control" id="valor_produto" name="valor_produto" placeholder="Valor do produto por unidade">
-          </div>
-
-          <button type="submit" class="btn btn-dark">Cadastrar</button>
-        </form>
-      </div>
-</div>
-</body>
-</html>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form action="{{ route('produtos.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="nome_produto" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nome do Produto</label>
+                            <input type="text" name="nome_produto" id="nome_produto" value="{{ old('nome_produto') }}" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" placeholder="Digite o nome do produto" required>
+                            @error('nome_produto') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="categoria" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Categoria</label>
+                            <input type="text" name="categoria" id="categoria" value="{{ old('categoria') }}" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" placeholder="Digite a categoria" required>
+                            @error('categoria') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="valor_produto" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Valor Unitário</label>
+                            <input type="number" step="0.01" name="valor_produto" id="valor_produto" value="{{ old('valor_produto') }}" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" placeholder="Digite o valor unitário" required>
+                            @error('valor_produto') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                            Cadastrar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

@@ -29,7 +29,7 @@ class ClientesController extends Controller
 
       public function listarClientes()
       {
-          $clientes = clientes::all(); // recuperando parametros da tabela
+          $clientes = clientes::orderBy('id_cliente', 'desc')->get(); // recuperando parametros da tabela
           return view('clientes.clientes', ['clientes' => $clientes]);
       }
 

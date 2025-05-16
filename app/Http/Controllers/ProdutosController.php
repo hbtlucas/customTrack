@@ -25,8 +25,9 @@ class ProdutosController extends Controller
     }
 
     public function listarprodutos(){
-        $produtos = produtos::all(); // recuperando parametros da tabela
-        return view('produtos.produtos', ['produtos' => $produtos]);
+        $produtos = produtos::orderBy('id_produto', 'desc')->get();
+
+        return view('produtos.produtos', compact('produtos'));
     }
 
     public function editprodutos($id_produto){

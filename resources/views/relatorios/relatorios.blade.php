@@ -1,120 +1,54 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <style>
-    /* Estilos para a sidebar */
-    .sidebar {
-      height: 100%;
-      width: 250px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #333;
-      padding-top: 20px;
-      color: white;
-    }
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Anotações') }}
+        </h2>
+    </x-slot>
 
-    .sidebar a {
-      padding: 15px 25px;
-      text-decoration: none;
-      font-size: 20px;
-      color: white;
-      display: block;
-      transition: 0.2s;
-    }
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <!-- Botões de Ação -->
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <form action="{{ route('relatorios.cadastro') }}">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                                Adicionar Anotação
+                            </button>
+                        </form>
+                    </div>
 
-    .sidebar a.active {
-    background-color: #ff3c00;
-    color: white;
-    }
-
-    .sidebar a:hover {
-      background-color: #555;
-    }
-
-    /* Estilos para o conteúdo */
-    .content {
-      margin-left: 250px;
-      padding: 20px;
-    }
-    .user {
-    position: absolute;
-    margin-bottom: 20px;
-    bottom: 0; 
-    font-size: 25px;
-    color: red;
-    font-weight: 700;
-}
-  </style>
-</head>
-<body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-        <span style="margin-left: 25px; font-size: 30px; color: rgb(255, 255, 255);">Custom</span>
-        <span style="font-size: 30px; color: rgb(255, 0, 0);">Track</span>
-    <a href="{{route('clientes')}}">Clientes</a>
-    <a href="{{route('pedidos')}}">Pedidos</a>
-    <a href="{{route('produtos')}}">Produtos</a>
-    <a href="{{route('relatorios')}}" class="active">Relatórios</a>
-
-    <div class="user">
-      <span style="margin-left: 25px; font-size: 25px; color: rgb(255, 0, 0)">{{ session('user') }}</span>
-    </div>  
-  </div>
-
-  <!-- Conteúdo da página -->
-  <div class="content">
-
-    <div class="row">
-        <form style="margin: 10px" method="GET" action="{{route('index')}}">
-          <button style="" class="btn #546e7a blue-grey darken-1" type="submit">Home</button>
-        </form>
-  
-        <form style="margin: 10px;" method="GET" action="{{ route('relatorios.cadastro') }}">
-          @csrf
-          <button style="" class="btn #546e7a blue-grey darken-1" type="submit">Adicionar Relatório</button>
-        </form>
-
-    </div>
-  
-    @foreach ($relatorios as $relatorios)
-        <div class="row">
-          <div class="col s12 m6">
-            <div class="card">
-              <div class="card-content">
-                <span class="card-title">{{$relatorios->titulo}}</span>
-                <span class="card-subtitle">Cliente: {{$relatorios->cliente}}</span>
-                <p>{{$relatorios->texto}}</p>
-              </div>
-              <div class="card-action">
-
-                <div class="row">
-                  <div style="margin-left: 10px">
-                    <form action="{{ route('relatorios.edit',['id'=>$relatorios->id]) }}">
-                      @csrf
-                      <button type="submit" class="btn #37474f blue-grey darken-3" >Editar</button>
-                    </form>
-                  </div>
-
-                  <div style="margin-left: 10px">
-                    <form action="{{ route('relatorios.delete',['id'=>$relatorios->id]) }}" method="POST">
-                      @csrf
-                      @method ('DELETE')
-                        <button type="submit" class="btn red" >Deletar</button>
-                    </form>
-                  </div>
+                    <!-- Lista de Relatórios -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        @foreach ($relatorios as $relatorio)
+                            <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
+                                <div class="p-6">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ $relatorio->titulo }}</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Cliente: {{ $relatorio->cliente }}</p>
+                                    <p class="mt-2 text-gray-700 dark:text-gray-300">{{ $relatorio->texto }}</p>
+                                </div>
+                                <div class="p-6 border-t border-gray-200 dark:border-gray-700">
+                                    <div class="flex gap-2">
+                                        <form action="{{ route('relatorios.edit', ['id' => $relatorio->id]) }}" method="GET">
+                                            @csrf
+                                            <button type="submit" class="inline-flex items-center px-3 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                Editar
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('relatorios.delete', ['id' => $relatorio->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="inline-flex items-center px-3 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                Deletar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-        @endforeach
-
     </div>
-</body>
-</html>
+</x-app-layout>

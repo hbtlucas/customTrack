@@ -12,7 +12,7 @@ class RelatoriosController extends Controller
     }
 
     public function listar(){
-        $relatorios = relatorios::all();
+        $relatorios = relatorios::orderBy('id', 'desc')->get();
         return view('relatorios.relatorios',['relatorios'=> $relatorios]);
     }
 

@@ -72,11 +72,6 @@
   <div class="content">
     <div class="row">
         <div style="margin-left: 30px;">
-          <div>
-              @if (session('user'))
-              <h3>Seja bem-vindo, {{session('user')}}!</h3>
-              @endif
-          </div>
             <div style="padding: 20px; border: solid 1px rgb(85, 85, 85) ;" class="card">
               <div class="card-image">
                 <img style="width: 600px; height: auto;" src="{{asset('imagens/5012404.jpg')}}" alt="Imagem de fundo">
